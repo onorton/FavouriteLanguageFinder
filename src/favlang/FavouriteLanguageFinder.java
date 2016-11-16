@@ -9,16 +9,7 @@ public class FavouriteLanguageFinder {
 
     public static void main(String[] args) {
 
-        String username;
-        // Allows user to pass username to query in command line
-        if (args.length == 1) {
-            username = args[0];
-        } else {
-            // Otherwise, prompts user to enter username
-            Scanner reader = new Scanner(System.in);
-            System.out.println("Please enter the username to query.");
-            username = reader.nextLine();
-        }
+        String username = getUsername(args);
 
         try {
             // Tries to find the favourite language of the user with the username
@@ -31,6 +22,19 @@ public class FavouriteLanguageFinder {
         } catch (IOException e) {
             System.out.println("This user does not exist on GitHub.");
         }
+    }
+
+    private static String getUsername(String[] args) {
+        // Allows user to pass username to query in command line
+        if (args.length == 1) {
+            return args[0];
+        } else {
+            // Otherwise, prompts user to enter username
+            Scanner reader = new Scanner(System.in);
+            System.out.println("Please enter the username to query.");
+            return reader.nextLine();
+        }
+
     }
 
 
