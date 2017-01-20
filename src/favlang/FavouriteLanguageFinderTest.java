@@ -34,7 +34,7 @@ public class FavouriteLanguageFinderTest {
     }
 
     @Test
-    public void GettingFavouriteLanguageMultipleHighestReturnsOneWithHighest() {
+    public void GettingFavouriteLanguageMultipleHighestReturnsAll() {
         languageCounts.put("C", 10);
         languageCounts.put("Java", 10);
         languageCounts.put("Ruby", 10);
@@ -49,6 +49,7 @@ public class FavouriteLanguageFinderTest {
 
     }
 
+    @Test
     public void FindLanguageUserConsistent() throws IOException {
         List<String> favLangs = FavouriteLanguageFinder.findFavouriteLanguages("onorton");
         List<String> favLangs2 = FavouriteLanguageFinder.findFavouriteLanguages("onorton");
