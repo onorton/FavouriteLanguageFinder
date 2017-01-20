@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,21 +16,21 @@ public class FavouriteLanguageFinderTest {
     private Map<String, Integer> languageCounts = new HashMap<>();
 
     @Test
-    public void GettingFavouriteLanguageEmptyListReturnsNull() {
-        Assert.assertNull(FavouriteLanguageFinder.getFavouriteLanguage(languageCounts));
+    public void GettingFavouriteLanguageEmptyListReturnsEmptyList() {
+        Assert.assertTrue(FavouriteLanguageFinder.getFavouriteLanguage(languageCounts).isEmpty());
     }
 
     @Test
     public void GettingFavouriteLanguageSingleItemReturnsLanguage() {
         languageCounts.put("java", 2);
-        Assert.assertEquals("java", FavouriteLanguageFinder.getFavouriteLanguage(languageCounts));
+        Assert.assertEquals("java", FavouriteLanguageFinder.getFavouriteLanguage(languageCounts).get(0));
     }
 
     @Test
     public void GettingFavouriteLanguageMultipleReturnsHighestCount() {
         languageCounts.put("java", 10);
         languageCounts.put("C++", 2);
-        Assert.assertEquals("java", FavouriteLanguageFinder.getFavouriteLanguage(languageCounts));
+        Assert.assertEquals("java", FavouriteLanguageFinder.getFavouriteLanguage(languageCounts).get(0));
     }
 
     @Test
@@ -38,14 +39,25 @@ public class FavouriteLanguageFinderTest {
         languageCounts.put("Java", 10);
         languageCounts.put("Ruby", 10);
         languageCounts.put("C++", 2);
-        String favLang = FavouriteLanguageFinder.getFavouriteLanguage(languageCounts);
-        int highestCount = languageCounts.get(favLang);
+        List<String> favLangs = FavouriteLanguageFinder.getFavouriteLanguage(languageCounts);
+        Assert.assertEquals(3, favLangs.size());
+        int highestCount = languageCounts.get(favLangs.get(0));
         Assert.assertEquals(10, highestCount);
-        Assert.assertTrue(favLang.equals("C") || favLang.equals("Java") || favLang.equals("Ruby"));
+        Assert.assertTrue(favLangs.contains("C"));
+        Assert.assertTrue(favLangs.contains("Java"));
+        Assert.assertTrue(favLangs.contains("Ruby"));
+
+    }
+
+    public void FindLanguageUserConsistent() throws IOException {
+        List<String> favLangs = FavouriteLanguageFinder.findFavouriteLanguages("onorton");
+        List<String> favLangs2 = FavouriteLanguageFinder.findFavouriteLanguages("onorton");
+        Assert.assertEquals(favLangs, favLangs2);
+
     }
 
     @Test(expected = IOException.class)
     public void FindLanguageUserDoestNotExist() throws IOException {
-        FavouriteLanguageFinder.findFavouriteLanguage("!");
+        FavouriteLanguageFinder.findFavouriteLanguages("!");
     }
 }

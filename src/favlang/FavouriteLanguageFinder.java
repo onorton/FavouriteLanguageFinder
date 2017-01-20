@@ -36,6 +36,11 @@ public class FavouriteLanguageFinder {
         }
     }
 
+    public static List<String> findFavouriteLanguages(String username) throws IOException {
+        Map<String, Integer> languages = getLanguageCounts(username);
+        return getFavouriteLanguage(languages);
+    }
+
     private static String getUsername(String[] args) {
         // Allows user to pass username to query in command line
         if (args.length == 1) {
@@ -52,10 +57,7 @@ public class FavouriteLanguageFinder {
         return reader.nextLine();
     }
 
-    public static List<String> findFavouriteLanguages(String username) throws IOException {
-        Map<String, Integer> languages = getLanguageCounts(username);
-        return getFavouriteLanguage(languages);
-    }
+
 
     /**
      *
