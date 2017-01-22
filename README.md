@@ -10,5 +10,5 @@ To run in the terminal
 
 1. Clone or download this repository
 2. Open a terminal and navigate to this repository
-3. Enter into the terminal "java -jar FavouriteLanguage.jar" followed by (or not a username)
+3. Enter into the terminal "java -jar FavouriteLanguage.jar" followed by (or not) a username
 4. If you did not enter a username you will be prompted to enter one.
